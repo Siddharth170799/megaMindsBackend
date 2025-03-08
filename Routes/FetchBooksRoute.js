@@ -53,19 +53,19 @@ console.log(listOfBooks,"list of books")
   }
 );
 
-// BooksRoute.get("/get/Books", authMiddleware, async (req, res) => {
-//   try {
-//     const listOfBooks = await BookSchema.find();
-//     console.log(listOfBooks)
-//     res.status(200).send({
-//       message: "Books fetched successfully",
-//       data: listOfBooks,
-//       status: 200,
-//     });
-//   } catch (err) {
+BooksRoute.get("/get/Books", authMiddleware, async (req, res) => {
+  try {
+    const listOfBooks = await BookSchema.find();
+    console.log(listOfBooks,"listof books")
+    res.status(200).send({
+      message: "Books fetched successfully",
+      data: listOfBooks,
+      status: 200,
+    });
+  } catch (err) {
    
-//     res.status(500).send({ message: "Error fetching books", status: 500 });
-//   }
-// });
+    res.status(500).send({ message: "Error fetching books", status: 500 });
+  }
+});
 
 export default BooksRoute;
