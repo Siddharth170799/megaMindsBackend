@@ -24,26 +24,9 @@ const authenticateUser = async (email, password) => {
 
 const SignUpRoute = express.Router();
 
-// SignUpRoute.post("/postSignUpDetails", async (req, res) => {
-//   try {
-//     const { Name, Email, Password } = req.body;
-
-//     const signUpDetails = new SignUpSchema({
-//       Name: Name,
-//       Email: Email,
-//       Password: Password,
-//     });
-//     signUpDetails.save();
-//     res.send({ message: "SignUpdetails Posted Successfully", status: 200 });
-//   } catch (err) {
-//     res.send({ message: "Error Posting SignUpDetails", status: 500 });
-//   }
-// });
-
 SignUpRoute.post(
   "/postSignUpDetails",
-  // Validation middleware
-  [
+   [
     body("Name")
       .isString()
       .withMessage("Name must be a string")

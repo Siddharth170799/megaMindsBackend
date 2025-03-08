@@ -4,9 +4,14 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import SignUpRoute from "./Routes/SignUpRoute.js";
 import BooksRoute from "./Routes/FetchBooksRoute.js";
+import dotenv from "dotenv";
+
+
+dotenv.config();
 
 const app = express();
-const PORT = 4444;
+const PORT = process.env.PORT;
+const DBString = process.env.DB_URI;
 app.use(cors());
 app.use(express.json());
 app.use("/api", SignUpRoute);
@@ -18,7 +23,7 @@ app.listen(PORT, () => {
 
 mongoose
   .connect(
-    "mongodb+srv://boorgusiddharth:siddharthjuly99@siddharth.fiuilki.mongodb.net/?retryWrites=true&w=majority&appName=Siddharth"
+    DBString
   )
   .then(() => console.log("DB Connected Successfully"))
   .catch((err) => console.log("Error connecting DB", err.message));
