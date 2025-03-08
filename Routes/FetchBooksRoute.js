@@ -8,8 +8,7 @@ const BooksRoute = express.Router();
 BooksRoute.post(
   "/post/books",
   authMiddleware,
-
-  [
+ [
     body("Title")
       .isString()
       .withMessage("Title must be a string")
@@ -38,15 +37,15 @@ BooksRoute.post(
 
       await book.save();
 
-      const listOfBooks = await BookSchema.find({ UserId: req.user.userId });
-
+      const listOfBooks = await BookSchema.find();
+console.log(listOfBooks,"list of books")
       res.status(200).send({
         message: "Book saved successfully",
         status: 200,
         data: listOfBooks,
       });
     } catch (err) {
-      console.error(err);
+      
       res
         .status(500)
         .send({ message: "Error posting book to the db", status: 500 });
@@ -54,18 +53,19 @@ BooksRoute.post(
   }
 );
 
-BooksRoute.get("/get/Books", authMiddleware, async (req, res) => {
-  try {
-    const listOfBooks = await BookSchema.find();
-    res.status(200).send({
-      message: "Books fetched successfully",
-      data: listOfBooks,
-      status: 200,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ message: "Error fetching books", status: 500 });
-  }
-});
+// BooksRoute.get("/get/Books", authMiddleware, async (req, res) => {
+//   try {
+//     const listOfBooks = await BookSchema.find();
+//     console.log(listOfBooks)
+//     res.status(200).send({
+//       message: "Books fetched successfully",
+//       data: listOfBooks,
+//       status: 200,
+//     });
+//   } catch (err) {
+   
+//     res.status(500).send({ message: "Error fetching books", status: 500 });
+//   }
+// });
 
 export default BooksRoute;
