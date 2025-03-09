@@ -6,7 +6,6 @@ import SignUpRoute from "./Routes/SignUpRoute.js";
 import BooksRoute from "./Routes/FetchBooksRoute.js";
 import dotenv from "dotenv";
 
-
 dotenv.config();
 
 const app = express();
@@ -16,10 +15,10 @@ app.use(cors());
 app.use(express.json());
 app.use("/api", SignUpRoute);
 app.use("/api",BooksRoute)
+
 app.listen(PORT, () => {
   console.log(`Server is running successfully on ${PORT}`);
 });
-
 
 mongoose
   .connect(

@@ -37,15 +37,12 @@ BooksRoute.post(
 
       await book.save();
 
-      const listOfBooks = await BookSchema.find();
-console.log(listOfBooks,"list of books")
       res.status(200).send({
         message: "Book saved successfully",
         status: 200,
-        data: listOfBooks,
+        
       });
     } catch (err) {
-      
       res
         .status(500)
         .send({ message: "Error posting book to the db", status: 500 });
@@ -63,8 +60,7 @@ BooksRoute.get("/get/Books", authMiddleware, async (req, res) => {
       status: 200,
     });
   } catch (err) {
-   
-    res.status(500).send({ message: "Error fetching books", status: 500 });
+   res.status(500).send({ message: "Error fetching books", status: 500 });
   }
 });
 

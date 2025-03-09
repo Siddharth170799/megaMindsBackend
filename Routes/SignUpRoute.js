@@ -3,6 +3,7 @@ import SignUpSchema from "../Schema/SignUpSchema.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { body, validationResult } from "express-validator";
+
 const authenticateUser = async (email, password) => {
   const details = await SignUpSchema.findOne({ Email: email });
 
@@ -11,7 +12,7 @@ const authenticateUser = async (email, password) => {
     return null;
   }
 
-  const isPasswordValid = await bcrypt.compare(password, details.Password);
+const isPasswordValid = await bcrypt.compare(password, details.Password);
 
   if (!isPasswordValid) {
     console.log("Invalid password");
@@ -104,7 +105,7 @@ SignUpRoute.post(
         const userId = userObject._id.toString();
 
         const token = jwt.sign({ userId: userId }, "my_secret_key", {
-          expiresIn: "1hr",
+          expiresIn: '1hr'
         });
         res.send({ token });
       } else {
